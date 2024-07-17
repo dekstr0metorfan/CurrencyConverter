@@ -1,24 +1,19 @@
 package org.example;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import java.lang.reflect.*;
-
-import java.io.*;
-import java.util.List;
-import java.util.Map;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class NBP
 {
     public static void NBP_converter()
     {
-        String url = "http://api.nbp.pl/api/exchangerates/tables/a/";
+        String url = "https://api.nbp.pl/api/exchangerates/tables/a/";
         try (CloseableHttpClient httpClient = HttpClients.createDefault())
         {
             HttpGet request = new HttpGet(url);
@@ -28,17 +23,25 @@ public class NBP
                 if (statusCode == 200)
                 {
                     HttpEntity entity = response.getEntity();
-                    String responseBody = EntityUtils.toString(entity);
+                    String ratesJSON = EntityUtils.toString(entity);
 
-                    Gson gson = new Gson();
-                    Type listType = new TypeToken<List<Map<String, Object>>>() {}.getType();
-                    List<Map<String, Object>> ratesList = gson.fromJson(responseBody, listType);
+                    JSONArray jsonArray = new JSONArray(ratesJSON);
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    JSONArray rates = jsonObject.getJSONArray("rates");
 
-                    ratesList.forEach(System.out::println);
+                    StringBuilder result = new StringBuilder();
+                    for (int i = 0; i < rates.length(); i++) {
+                        JSONObject rate = rates.getJSONObject(i);
+                        String code = rate.getString("code");
+                        double mid = rate.getDouble("mid");
+                        result.append(code).append(" : ").append(mid).append("\n");
+                    }
+
+                    System.out.println(result);
                 }
                 else
                 {
-                    System.err.println("Nieudane żądanie. Kod odpowiedzi: " + statusCode);
+                    System.err.println("Error code: " + statusCode);
                 }
             }
         }
