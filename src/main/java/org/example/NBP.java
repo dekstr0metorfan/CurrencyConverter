@@ -9,6 +9,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.*;
 
 public class NBP
@@ -21,10 +22,32 @@ public class NBP
         System.out.println("Enter code of currency (according to ISO 4217): ");
         String currency = scanner.nextLine();
 
-        String url = "https://api.nbp.pl/api/exchangerates/tables/a/";
+        HashMap<String, Double> result = new HashMap<>();
+
+        String url1 = "https://api.nbp.pl/api/exchangerates/tables/a/";
+        String url2 = "https://api.nbp.pl/api/exchangerates/tables/b/";
+        CreateHashMap(result, url1);
+        CreateHashMap(result, url2);
+
+        double outcome = 0;
+        if(result.containsKey(currency))
+        {
+            outcome = amount * result.get(currency);
+
+            System.out.print("Price of this currency is ");
+            System.out.printf("%.2f", outcome);
+            System.out.println(" PLN");
+        }
+        else
+        {
+            System.out.println("Wrong currency code!");
+        }
+    }
+
+    private static void CreateHashMap(HashMap<String, Double> result, String url2) throws IOException {
         try (CloseableHttpClient httpClient = HttpClients.createDefault())
         {
-            HttpGet request = new HttpGet(url);
+            HttpGet request = new HttpGet(url2);
             try (CloseableHttpResponse response = httpClient.execute(request))
             {
                 int statusCode = response.getStatusLine().getStatusCode();
@@ -37,26 +60,11 @@ public class NBP
                     JSONObject jsonObject = jsonArray.getJSONObject(0);
                     JSONArray rates = jsonObject.getJSONArray("rates");
 
-                    HashMap<String, Double> result = new HashMap<>();
                     for (int i = 0; i < rates.length(); i++) {
                         JSONObject rate = rates.getJSONObject(i);
                         String code = rate.getString("code");
                         double mid = rate.getDouble("mid");
                         result.put(code, mid);
-                    }
-
-                    double outcome = 0;
-                    if(result.containsKey(currency))
-                    {
-                        outcome = amount * result.get(currency);
-
-                        System.out.print("Price of this currency is ");
-                        System.out.printf("%.2f", outcome);
-                        System.out.println(" PLN");
-                    }
-                    else
-                    {
-                        System.out.println("Wrong currency code!");
                     }
                 }
                 else
