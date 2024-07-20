@@ -12,22 +12,20 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.*;
 
-public class NBP
+public class CoinCap
 {
-    public static void NBP_converter() throws Exception {
+    public static void CoinCap_converter() throws Exception {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter amount of currency you want to get: ");
         double amount = scanner.nextDouble();
         scanner.nextLine();
-        System.out.println("Enter code of currency (according to ISO 4217): ");
+        System.out.println("Enter code of currency: ");
         String currency = scanner.nextLine();
 
-        HashMap<String, Double> result = new HashMap<>();
+        String url = "https://api.coincap.io/v2/assets";
 
-        String url1 = "https://api.nbp.pl/api/exchangerates/tables/a/";
-        String url2 = "https://api.nbp.pl/api/exchangerates/tables/b/";
-        CreateHashMap(result, url1);
-        CreateHashMap(result, url2);
+        HashMap<String, Double> result = new HashMap<>();
+        CreateHashMap(result, url);
 
         double outcome = 0;
         if(result.containsKey(currency))
@@ -36,7 +34,7 @@ public class NBP
 
             System.out.print("Price of this currency is ");
             System.out.printf("%.2f", outcome);
-            System.out.println(" PLN");
+            System.out.println(" USD");
             System.out.println();
         }
         else
@@ -57,15 +55,14 @@ public class NBP
                     HttpEntity entity = response.getEntity();
                     String ratesJSON = EntityUtils.toString(entity);
 
-                    JSONArray jsonArray = new JSONArray(ratesJSON);
-                    JSONObject jsonObject = jsonArray.getJSONObject(0);
-                    JSONArray rates = jsonObject.getJSONArray("rates");
+                    JSONObject jsonObject = new JSONObject(ratesJSON);
+                    JSONArray data = jsonObject.getJSONArray("data");
 
-                    for (int i = 0; i < rates.length(); i++) {
-                        JSONObject rate = rates.getJSONObject(i);
-                        String code = rate.getString("code");
-                        double mid = rate.getDouble("mid");
-                        result.put(code, mid);
+                    for (int i = 0; i < data.length(); i++) {
+                        JSONObject rate = data.getJSONObject(i);
+                        String symbol = rate.getString("symbol");
+                        double priceUsd = rate.getDouble("priceUsd");
+                        result.put(symbol, priceUsd);
                     }
                 }
                 else
