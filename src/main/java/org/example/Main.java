@@ -55,6 +55,7 @@ public class Main
         message += "Price of this currency is ";
         message += String.format("%.2f", number);
         message += " " + final_code;
+
         return message;
     }
 }

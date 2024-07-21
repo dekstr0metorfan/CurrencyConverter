@@ -49,7 +49,7 @@ public class GUI extends JFrame
         {
             try
             {
-                JOptionPane.showMessageDialog(null, CoinCap.CoinCap_converter(1, "BTC"), "1 BTC to USD", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, Main.ShowResult(CoinCap.CoinCap_converter(1, "BTC"), "USD"), "1 BTC to USD", JOptionPane.INFORMATION_MESSAGE);
             }
             catch (Exception ex)
             {
