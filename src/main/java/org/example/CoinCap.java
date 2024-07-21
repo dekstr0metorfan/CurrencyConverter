@@ -14,26 +14,23 @@ import java.util.*;
 
 public class CoinCap
 {
-    public static void CoinCap_converter(double amount, String code) throws Exception {
+    public static double CoinCap_converter(double amount, String code) throws Exception {
         String url = "https://api.coincap.io/v2/assets";
 
         HashMap<String, Double> result = new HashMap<>();
         CreateHashMap(result, url);
 
-        double outcome = 0;
+        double outcome;
         if(result.containsKey(code))
         {
             outcome = amount * result.get(code);
-
-            System.out.print("Price of this currency is ");
-            System.out.printf("%.2f", outcome);
-            System.out.println(" USD");
-            System.out.println();
+            return outcome;
         }
         else
         {
             System.out.println("Wrong currency code!");
         }
+        return -1;
     }
 
     private static void CreateHashMap(HashMap<String, Double> result, String url) throws IOException {
