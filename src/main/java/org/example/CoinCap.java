@@ -14,23 +14,16 @@ import java.util.*;
 
 public class CoinCap
 {
-    public static void CoinCap_converter() throws Exception {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter amount of currency you want to get: ");
-        double amount = scanner.nextDouble();
-        scanner.nextLine();
-        System.out.println("Enter code of currency: ");
-        String currency = scanner.nextLine();
-
+    public static void CoinCap_converter(double amount, String code) throws Exception {
         String url = "https://api.coincap.io/v2/assets";
 
         HashMap<String, Double> result = new HashMap<>();
         CreateHashMap(result, url);
 
         double outcome = 0;
-        if(result.containsKey(currency))
+        if(result.containsKey(code))
         {
-            outcome = amount * result.get(currency);
+            outcome = amount * result.get(code);
 
             System.out.print("Price of this currency is ");
             System.out.printf("%.2f", outcome);

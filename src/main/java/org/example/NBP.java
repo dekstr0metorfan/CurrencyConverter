@@ -14,14 +14,7 @@ import java.util.*;
 
 public class NBP
 {
-    public static void NBP_converter() throws Exception {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter amount of currency you want to get: ");
-        double amount = scanner.nextDouble();
-        scanner.nextLine();
-        System.out.println("Enter code of currency (according to ISO 4217): ");
-        String currency = scanner.nextLine();
-
+    public static void NBP_converter(double amount, String code) throws Exception {
         HashMap<String, Double> result = new HashMap<>();
 
         String url1 = "https://api.nbp.pl/api/exchangerates/tables/a/";
@@ -29,10 +22,10 @@ public class NBP
         CreateHashMap(result, url1);
         CreateHashMap(result, url2);
 
-        double outcome = 0;
-        if(result.containsKey(currency))
+        double outcome;
+        if(result.containsKey(code))
         {
-            outcome = amount * result.get(currency);
+            outcome = amount * result.get(code);
 
             System.out.print("Price of this currency is ");
             System.out.printf("%.2f", outcome);

@@ -17,14 +17,19 @@ public class Main
             System.out.println("Type the number of option you want to use:");
             int choice = scanner.nextInt();
             scanner.nextLine();
+            System.out.println("Enter code of currency (according to ISO 4217): ");
+            String code = scanner.nextLine();
+            System.out.println("Enter amount of currency you want to get: ");
+            double amount = scanner.nextDouble();
+            scanner.nextLine();
 
             switch(choice)
             {
                 case 1:
-                    NBP.NBP_converter();
+                    NBP.NBP_converter(amount, code);
                     break;
                 case 2:
-                    CoinCap.CoinCap_converter();
+                    CoinCap.CoinCap_converter(amount, code);
                     break;
                 case 0:
                     x = false;
