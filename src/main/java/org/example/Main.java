@@ -5,6 +5,9 @@ import java.util.Scanner;
 public class Main
 {
     public static void main(String[] args) throws Exception {
+
+        new GUI();
+        /*
         Scanner scanner = new Scanner(System.in);
         while(true)
         {
@@ -43,13 +46,15 @@ public class Main
                      break;
             }
         }
+         */
     }
 
-    public static void ShowResult(double number, String final_code)
+    public static String ShowResult(double number, String final_code)
     {
-        System.out.print("Price of this currency is ");
-        System.out.printf("%.2f", number);
-        System.out.println(" " + final_code);
-        System.out.println();
+        String message = "";
+        message += "Price of this currency is ";
+        message += String.format("%.2f", number);
+        message += " " + final_code;
+        return message;
     }
 }
