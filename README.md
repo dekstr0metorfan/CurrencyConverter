@@ -1,5 +1,5 @@
 ### Overview
-**CurrencyConverter** is a Java application designed for currency conversion. The program uses various APIs to make certain conversions, and was built using Apache Maven. 
+**CurrencyConverter** is a Java application designed for currency conversion. The program uses various APIs to make certain conversions and was built using Apache Maven. 
 
 ### Objectives
 The main objectives of the project are:
