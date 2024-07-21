@@ -9,9 +9,9 @@ public class Main
         while(true)
         {
             System.out.println("Which converter do you want to use?");
-            System.out.println("1 - Polish National Bank converter (fiat currencies -> PLN)");
-            System.out.println("2 - CoinCap converter (cryptocurrency -> USD)");
-            System.out.println("3 - CoinCap converter (cryptocurrency -> PLN)");
+            System.out.println("1 - Polish National Bank (fiat currencies -> PLN)");
+            System.out.println("2 - CoinCap (cryptocurrencies -> USD)");
+            System.out.println("3 - CoinCap x Polish National Bank (cryptocurrencies -> PLN)");
             System.out.println("0 - end the program");
             System.out.println();
             System.out.println("Type the number of option you want to use:");
