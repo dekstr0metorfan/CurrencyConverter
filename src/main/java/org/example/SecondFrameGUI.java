@@ -10,7 +10,7 @@ public class SecondFrameGUI extends JFrame
     public SecondFrameGUI(int choice)
     {
         setTitle("CurrencyConverter");
-        setSize(500, 300);
+        setSize(320, 300);
         setLocationRelativeTo(null);
 
         code = new JTextField();
@@ -21,11 +21,11 @@ public class SecondFrameGUI extends JFrame
         JLabel codeLabel = new JLabel("Currency code:");
 
         setLayout(null);
-        amountLabel.setBounds(50, 0, 200, 30);
-        amount.setBounds(50, 30, 200, 30);
-        codeLabel.setBounds(50, 70, 200, 30);
-        code.setBounds(50, 100, 200, 30);
-        submitButton.setBounds(100, 170, 100, 30);
+        amountLabel.setBounds(50, 10, 200, 30);
+        amount.setBounds(50, 40, 200, 30);
+        codeLabel.setBounds(50, 80, 200, 30);
+        code.setBounds(50, 110, 200, 30);
+        submitButton.setBounds(100, 180, 100, 30);
 
         add(code);
         add(amount);
