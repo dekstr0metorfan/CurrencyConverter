@@ -2,9 +2,9 @@ package org.example;
 
 import javax.swing.*;
 
-public class GUI extends JFrame
+public class MainFrameGUI extends JFrame
 {
-    public GUI()
+    public MainFrameGUI()
     {
         JFrame frame = new JFrame("CurrencyConverter");
         frame.setSize(560, 350);
@@ -25,16 +25,10 @@ public class GUI extends JFrame
         JButton NBPbutton = new JButton("NBP");
         NBPbutton.setBounds(100, 100, 150, 100);
         panel.add(NBPbutton);
-        NBPbutton.addActionListener(e ->
-        {
-            try
-            {
-                JOptionPane.showMessageDialog(null, Main.ShowResult(NBP.NBP_converter(100, "USD"), "PLN"), "100 USD to PLN", JOptionPane.INFORMATION_MESSAGE);
-            }
-            catch (Exception ex)
-            {
-                throw new RuntimeException(ex);
-            }
+
+        NBPbutton.addActionListener(e -> {
+            SecondFrameGUI SecondFrameGUI = new SecondFrameGUI(1);
+            SecondFrameGUI.setVisible(true);
         });
 
         JLabel NBPlabel = new JLabel("Polish National Bank");
@@ -45,16 +39,9 @@ public class GUI extends JFrame
         CoinCapButton.setBounds(300, 100, 150, 100);
         panel.add(CoinCapButton);
 
-        CoinCapButton.addActionListener(e ->
-        {
-            try
-            {
-                JOptionPane.showMessageDialog(null, Main.ShowResult(CoinCap.CoinCap_converter(1, "BTC"), "USD"), "1 BTC to USD", JOptionPane.INFORMATION_MESSAGE);
-            }
-            catch (Exception ex)
-            {
-                throw new RuntimeException(ex);
-            }
+        CoinCapButton.addActionListener(e -> {
+            SecondFrameGUI SecondFrameGUI = new SecondFrameGUI(2);
+            SecondFrameGUI.setVisible(true);
         });
 
         JLabel CoinCaplabel = new JLabel("CoinCap");
