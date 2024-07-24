@@ -61,7 +61,7 @@ public class SecondFrameGUI extends JFrame
                         JOptionPane.showMessageDialog(null, "Wrong parameters!", "CurrencyConverter", JOptionPane.INFORMATION_MESSAGE);
                     }
                     else {
-                        JOptionPane.showMessageDialog(null, Main.ShowResult(CoinCap.CoinCap_converter(number, name), "USD"), "CurrencyConverter", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, Main.ShowResult(NBP.NBP_converter(CoinCap.CoinCap_converter(number, name), "USD"), "PLN"), "CurrencyConverter", JOptionPane.INFORMATION_MESSAGE);
                     }
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);

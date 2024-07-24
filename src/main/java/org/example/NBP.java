@@ -30,7 +30,7 @@ public class NBP
         }
         else
         {
-            System.out.println("Wrong currency code! NBP");
+            System.out.println("Wrong currency code!");
         }
         return -1;
     }
@@ -64,5 +64,21 @@ public class NBP
                 }
             }
         }
+    }
+
+    public static ArrayList<String> DropDownMenu() throws IOException
+    //Drop down menu is probably not the best idea for this project
+            // TODO: figure out: how to display the list of currencies?
+    {
+        HashMap<String, Double> result = new HashMap<>();
+
+        String url1 = "https://api.nbp.pl/api/exchangerates/tables/a/";
+        String url2 = "https://api.nbp.pl/api/exchangerates/tables/b/";
+        CreateHashMap(result, url1);
+        CreateHashMap(result, url2);
+
+        Set<String> keys = result.keySet();
+
+        return new ArrayList<>(keys);
     }
 }
