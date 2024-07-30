@@ -8,7 +8,7 @@ The main objectives of the project are:
 - Just learning new things :+1: such as JSON format
 
 ### TODO
-- [ ] GUI
+- [x] GUI
 - [ ] Creating and fixing new bugs
 - [ ] Adding some new APIs for different calculations
 - [ ] Change the code according to the DRY principle
